@@ -7,4 +7,4 @@ Este es mi primer repositorio en GitHub.
 
 Estoy aprendiendo programación 🚀
 
-Hice el primer cambios desde vs code
+Hice el segundo cambio desde vs code
