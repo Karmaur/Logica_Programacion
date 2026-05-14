@@ -13,3 +13,4 @@ decimal += d4 * 8**1
 decimal += d5 * 8**0
 
 print("El número en decimal es:", decimal)
+
