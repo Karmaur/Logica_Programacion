@@ -37,3 +37,79 @@ try:
 
 except ValueError:
     print("Error: Debe ingresar un número entero")
+
+
+# 2. Desarrollar un algoritmo para calcular el determinante de una matriz NXN.
+# La matriz debe disponer de un método llamado fill_matrix()
+# que llena la matriz de números aleatorios entre 1 y 20.
+
+import random
+
+
+class Matriz:
+
+    def __init__(self, n):
+        self.n = n
+        self.matriz = [[0 for _ in range(n)] for _ in range(n)]
+
+    # Método para llenar la matriz con números aleatorios
+    def fill_matrix(self):
+        for i in range(self.n):
+            for j in range(self.n):
+                self.matriz[i][j] = random.randint(1, 20)
+
+    # Método para mostrar la matriz
+    def mostrar(self):
+        print("\nMatriz:")
+        for fila in self.matriz:
+            print(fila)
+
+    # Método para calcular el determinante
+    def determinante(self, matriz=None):
+
+        if matriz is None:
+            matriz = self.matriz
+
+        # Caso base 1x1
+        if len(matriz) == 1:
+            return matriz[0][0]
+
+        # Caso base 2x2
+        if len(matriz) == 2:
+            return (matriz[0][0] * matriz[1][1]) - (matriz[0][1] * matriz[1][0])
+
+        det = 0
+
+        # Expansión por cofactores
+        for c in range(len(matriz)):
+
+            submatriz = []
+
+            for fila in matriz[1:]:
+                nueva_fila = fila[:c] + fila[c+1:]
+                submatriz.append(nueva_fila)
+
+            signo = (-1) ** c
+
+            det += signo * matriz[0][c] * self.determinante(submatriz)
+
+        return det
+
+
+# Programa principal
+try:
+    n = int(input("Ingrese el tamaño de la matriz NxN: "))
+
+    if n <= 0:
+        print("Error: El tamaño debe ser mayor que 0.")
+
+    else:
+        matriz = Matriz(n)
+
+        matriz.fill_matrix()
+        matriz.mostrar()
+
+        print("\nDeterminante:", matriz.determinante())
+
+except ValueError:
+    print("Error: Debe ingresar un número entero válido.")
